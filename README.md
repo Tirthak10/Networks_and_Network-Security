@@ -377,6 +377,216 @@ The **TCP/IP model** is a simplified, practical version of the OSI model, with o
 - Knowing these models helps security professionals **identify where problems or threats occur**.
 
 ---
+# 🌐 Ultimate Guide to Network Protocols for Cybersecurity Analysts
+
+> ✍️ Authored from the Google Cybersecurity Professional Certificate curriculum.  
+> 🛡️ Best suited for entry-level cybersecurity professionals and tech enthusiasts.
+
+---
+
+## 📌 What Are Network Protocols?
+
+**Network protocols** are standardized rules that define how data is formatted, transmitted, and received over a network. Think of them as the grammar rules of the internet — without them, devices couldn’t understand each other.
+
+📦 Every piece of data sent over the internet is wrapped in a **data packet**. Protocols tell devices:
+- What to do with the packet 📬
+- How to interpret the data 🧠
+- When and where to send it 🚦
+
+> 🔐 **Security Perspective**: Protocols can be exploited. A strong grasp of them helps cybersecurity professionals detect, defend, and mitigate attacks.
+
+---
+
+## 🧭 3 Main Categories of Protocols
+
+| Category     | Description                                         | Why It Matters in Cybersecurity 🔍 |
+|--------------|-----------------------------------------------------|------------------------------------|
+| Communication| Moves data between devices                          | Analyze how attackers send data    |
+| Management   | Monitors and manages network devices                | Detect configuration issues        |
+| Security     | Secures data with encryption                        | Prevent eavesdropping and tampering|
+
+---
+
+# 📡 Communication Protocols
+
+These protocols govern **how data is sent, received, and structured** during transit.
+
+---
+
+## 🔁 Transmission Control Protocol (TCP)
+
+- ✅ **What It Is**: A **connection-oriented** protocol ensuring data reaches the destination **reliably and in order**.
+- 📶 **3-Way Handshake**:
+  1. SYN →
+  2. SYN-ACK ←
+  3. ACK →
+- 🧠 **Example**: Browsing Gmail or downloading software.
+- 🎯 **Use Case**: Any task where **data accuracy** matters.
+- ⚡ **Tip**: Use TCP for file transfers, emails, and websites.
+
+```txt
+Layer: Transport
+Ports: Varies (based on application)
+Reliable: ✅ Yes
+```
+
+---
+
+## 🛰️ User Datagram Protocol (UDP)
+
+- ✅ **What It Is**: A **connectionless**, fast protocol. It doesn't check if packets arrive — just sends them!
+- 🧠 **Example**: Streaming YouTube, Online Games, DNS queries.
+- 🎯 **Use Case**: Real-time tasks where speed > perfection.
+- ⚡ **Tip**: Use when dropped packets are tolerable.
+
+```txt
+Layer: Transport
+Ports: Varies (e.g., 53 for DNS)
+Reliable: ❌ No
+```
+
+---
+
+## 🌐 Hypertext Transfer Protocol (HTTP)
+
+- ✅ **What It Is**: Protocol used by web browsers to communicate with servers.
+- 🧠 **Example**: Accessing `http://example.com`
+- 🎯 **Use Case**: Viewing websites, APIs.
+- ⚠️ **Security Risk**: Sends data in plain text!
+- ⚡ **Tip**: Avoid entering passwords on HTTP sites.
+
+```txt
+Layer: Application
+Port: 80
+Security: ❌ Insecure
+```
+
+---
+
+## 🧭 Domain Name System (DNS)
+
+- ✅ **What It Is**: Translates domain names like `google.com` into IP addresses.
+- 🧠 **Example**: Typing a URL and loading a site.
+- 🎯 **Use Case**: Resolving any hostname to IP.
+- ⚠️ **Risk**: DNS Spoofing can redirect users to fake websites.
+- ⚡ **Tip**: DNS uses UDP, switches to TCP if needed.
+
+```txt
+Layer: Application
+Ports: 53 (UDP, falls back to TCP)
+Security: ⚠️ Vulnerable to spoofing
+```
+
+---
+
+# ⚙️ Management Protocols
+
+Used to **monitor, report, and manage** network health.
+
+---
+
+## 🛠️ Simple Network Management Protocol (SNMP)
+
+- ✅ **What It Is**: Helps admins monitor network devices.
+- 🧠 **Example**: Check router bandwidth usage.
+- 🎯 **Use Case**: Automated alerts, device configurations.
+- ⚠️ **Risk**: Weak SNMP versions can leak config data.
+- ⚡ **Tip**: Use SNMPv3 — it includes encryption.
+
+```txt
+Layer: Application
+Port: 161 (UDP)
+Security: V1 & V2c = ❌, V3 = ✅
+```
+
+---
+
+## 📶 Internet Control Message Protocol (ICMP)
+
+- ✅ **What It Is**: Sends messages about packet delivery failures.
+- 🧠 **Example**: `ping google.com` to test reachability.
+- 🎯 **Use Case**: Network diagnostics & troubleshooting.
+- ⚠️ **Risk**: Ping floods can overwhelm devices (DoS attack).
+- ⚡ **Tip**: Disable ICMP on public-facing devices if not needed.
+
+```txt
+Layer: Internet
+Port: N/A (protocol number 1)
+Security: ⚠️ Can be abused for scanning
+```
+
+---
+
+# 🔐 Security Protocols
+
+These protect **confidentiality, integrity, and authenticity** of network data.
+
+---
+
+## 🔒 Hypertext Transfer Protocol Secure (HTTPS)
+
+- ✅ **What It Is**: Secure version of HTTP using **SSL/TLS**.
+- 🧠 **Example**: Online shopping, banking.
+- 🎯 **Use Case**: Any web-based app that needs encryption.
+- ⚡ **Tip**: Use HTTPS **everywhere**, especially with sensitive data.
+
+```txt
+Layer: Application
+Port: 443
+Encryption: ✅ SSL/TLS
+```
+
+---
+
+## 📁 Secure File Transfer Protocol (SFTP)
+
+- ✅ **What It Is**: Secure file transfer using SSH.
+- 🧠 **Example**: Uploading data to cloud from terminal.
+- 🎯 **Use Case**: Secure backups, cloud sync.
+- ⚡ **Tip**: Use SFTP over FTP to prevent credential theft.
+
+```txt
+Layer: Application
+Port: 22 (via SSH)
+Encryption: ✅ AES (via SSH)
+```
+
+---
+
+> 🔍 **Remember**: These protocols encrypt content, but not IP addresses! Attackers can still perform **traffic analysis**.
+
+---
+
+## ✅ Summary Table
+
+| Protocol | Type | Layer | Port | Secure? | Common Use |
+|---------|------|-------|------|--------|------------|
+| TCP     | Comm | Transport | Dynamic | ✅ | Reliable transmission |
+| UDP     | Comm | Transport | Dynamic | ❌ | Fast, real-time |
+| HTTP    | Comm | Application | 80 | ❌ | Websites |
+| DNS     | Comm | Application | 53 | ⚠️ | URL to IP resolution |
+| SNMP    | Mgmt | Application | 161 | ⚠️ | Network monitoring |
+| ICMP    | Mgmt | Internet | N/A | ⚠️ | Diagnostics (ping) |
+| HTTPS   | Sec  | Application | 443 | ✅ | Secure websites |
+| SFTP    | Sec  | Application | 22 | ✅ | Secure file transfer |
+
+---
+
+## 🧠 Final Takeaways for Cybersecurity Analysts
+
+- Learn how each protocol **works AND can be exploited**.
+- Recognize signs of **protocol abuse** (e.g., DNS tunneling, ICMP exfiltration).
+- Secure communication using **modern encryption protocols**.
+- Use tools like **Wireshark, tcpdump**, and **nmap** to explore real traffic.
+
+---
+
+🔐 **Stay sharp. Secure smart.**  
+📚 *These notes will evolve as your cybersecurity journey progresses.*
+
+---
+
+© 2025 | Maintained by [Tirthak Likhar](https://www.linkedin.com/in/tirthak-likhar-8808a8255/)
 
 > ✨ This cheat sheet is part of a beginner-friendly cybersecurity knowledge base. Fork, star, and contribute to make it better!
 
